@@ -1,0 +1,98 @@
+
+.alumno-list {
+  padding: 2rem;
+}
+
+.alumno-list h2 {
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+th, td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+th {
+  background-color: #2c3e50;
+  color: white;
+  font-weight: 500;
+}
+
+tr:hover {
+  background-color: #f8f9fa;
+}
+
+td:last-child {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-start;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+}
+
+.btn-primary {
+  background-color: #3498db;
+  color: white;
+}
+
+.btn-info {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.btn-warning {
+  background-color: #f1c40f;
+  color: #2c3e50;
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+/* Estilos para la tabla */
+.alumno-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Estilos para las celdas de la tabla */
+.alumno-list th, .alumno-list td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Estilos para los encabezados */
+.alumno-list th {
+  background-color: #3498db;
+  color: white;
+}
+
+/* Estilos para los botones en la tabla */
+.alumno-list button {
+  margin-right: 10px;
+}
+
