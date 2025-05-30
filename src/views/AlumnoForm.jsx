@@ -1,53 +1,74 @@
 // Importación de hooks y contexto necesario
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
-import { AlumnoContext } from '../context/AlumnoContext.jsx';
-import './AlumnoForm.css';
+import { useNavigate, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { AlumnoContext } from "../context/AlumnoContext.jsx";
+import "./AlumnoForm.css";
 
 // Componente funcional del formulario para agregar alumno
-function AlumnoForm() {
+const AlumnoForm = () => {
   const navigate = useNavigate(); // Hook para redirigir luego de guardar
-  const { agregarAlumno } = useContext(AlumnoContext); // Función del contexto para agregar alumno
+  const { id } = useParams();
+  const { alumnos, actualizarAlumno, agregarAlumno } =
+    useContext(AlumnoContext); // Función del contexto para agregar alumno
 
   // Estado local para manejar los datos del formulario
   const [formData, setFormData] = useState({
-    lu: '',
-    nombre: '',
-    apellido: '',
-    curso: '',
-    email: '',
-    domicilio: '',
-    telefono: ''
+    lu: "",
+    nombre: "",
+    apellido: "",
+    curso: "",
+    email: "",
+    domicilio: "",
+    telefono: "",
   });
 
   // Función que actualiza el estado cada vez que se escribe en un campo
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   // Función que se ejecuta al enviar el formulario
   const handleSubmit = (e) => {
-    e.preventDefault(); // Evita recargar la página
-
-    // Crea un nuevo alumno con un ID único
-    const nuevoAlumno = {
-      ...formData,
-      id: Date.now()
-    };
-
-    agregarAlumno(nuevoAlumno); // Llama a la función del contexto para guardar el alumno
-    navigate('/alumnos'); // Redirige a la vista de lista de alumnos
+    e.preventDefault();
+    if (id) {
+      actualizarAlumno(Number(id), formData);
+      alert(`Alumno ${formData.nombre} actualizado correctamente`);
+    } else {
+      // Crea un nuevo alumno con un ID único
+      const nuevoAlumno = {
+        ...formData,
+        id: Date.now(),
+      };
+      agregarAlumno(nuevoAlumno);
+      alert(`Alumno ${nuevoAlumno.nombre} agregado correctamente`);
+    }
+    navigate("/alumnos");
   };
+
+  useEffect(() => {
+    // Este efecto carga los datos del alumno cuando el ID (LU) cambia
+    // o si la lista de alumnos se actualiza.
+    // Si el alumno no se encuentra, notifica y redirige.
+    if (!id) return;
+    if (!alumnos || alumnos.length === 0) return;
+
+    const alumno = alumnos.find((a) => a.id === Number(id));
+    if (alumno) {
+      setFormData(alumno);
+    } else {
+      alert(`Alumno con ID ${id} no encontrado`);
+      navigate("/alumnos");
+    }
+  }, [id, alumnos, navigate]);
 
   return (
     <div className="alumno-form">
       <h2>Nuevo Alumno</h2>
-      
+
       {/* Formulario controlado */}
       <form onSubmit={handleSubmit}>
         {/* Campo LU */}
@@ -149,7 +170,7 @@ function AlumnoForm() {
           <button
             type="button"
             className="btn btn-secondary"
-            onClick={() => navigate('/alumnos')}
+            onClick={() => navigate("/alumnos")}
           >
             Cancelar
           </button>
@@ -157,6 +178,6 @@ function AlumnoForm() {
       </form>
     </div>
   );
-}
+};
 
 export default AlumnoForm;
