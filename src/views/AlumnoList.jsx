@@ -1,12 +1,12 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Context } from '../context/context.jsx'; // Importa el contexto donde están los alumnos
+import { AlumnoContext } from '../context/AlumnoContext.jsx'; // Importa el contexto donde están los alumnos
 import './AlumnoList.css'; 
 
 
 function AlumnoList() {
   //aca se extraeria el array de alumnos y la función para eliminar del contexto
-  const { alumnos, eliminarAlumno } = useContext(Context);
+  const { alumnos, eliminarAlumno } = useContext(AlumnoContext);
 
   return (
     <div className="alumno-list">
