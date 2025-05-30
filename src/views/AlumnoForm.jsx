@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import { AlumnoContext } from '../context/AlumnoContext';
+import { AlumnoContext } from '../context/AlumnoContext.jsx';
 import './AlumnoForm.css';
 
 // Componente funcional del formulario para agregar alumno
