@@ -1,0 +1,67 @@
+/* Estilos para el componente de detalles del alumno */
+.alumno-detail {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.alumno-detail h2 {
+  color: #2c3e50;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.alumno-info {
+  background-color: white;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.alumno-info p {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: #34495e;
+}
+
+.alumno-info strong {
+  color: #2c3e50;
+  margin-right: 0.5rem;
+}
+
+.alumno-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-warning {
+  background-color: #f1c40f;
+  color: #2c3e50;
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #95a5a6;
+  color: white;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
