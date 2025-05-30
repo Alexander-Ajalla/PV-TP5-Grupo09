@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { AlumnoContext } from "../context/AlumnoContext";
+import { AlumnoContext } from "../context/context";
 import "./AlumnoDetail.css";
 
 function AlumnoDetail() {
