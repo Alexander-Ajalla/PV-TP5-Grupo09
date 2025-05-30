@@ -15,15 +15,20 @@ const AlumnoForm = () => {
   });
 
   useEffect(() => {
-    if (id) {
-      const alumnoAEditar = alumnos.find(
-        (alumno) => alumno.id === parseInt(id)
-      );
-      if (alumnoAEditar) {
-        setFormData(alumnoAEditar);
-      }
+    // Este efecto carga los datos del alumno cuando el ID (LU) cambia
+    // o si la lista de alumnos se actualiza.
+    // Si el alumno no se encuentra, notifica y redirige.
+    if (!id) return;
+    if (!alumnos || alumnos.length === 0) return;
+
+    const alumno = alumnos.find((a) => a.id === Number(id));
+    if (alumno) {
+      setFormData(alumno);
+    } else {
+      alert(`Alumno con ID ${id} no encontrado`);
+      navigate("/alumnos");
     }
-  }, [id, alumnos]);
+  }, [id, alumnos, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

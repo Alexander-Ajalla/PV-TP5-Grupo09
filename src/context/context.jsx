@@ -22,8 +22,8 @@ export const AlumnoProvider = ({ children }) => {
   };
 
   const actualizarAlumno = (id, datosActualizados) => {
-    setAlumnos(
-      alumnos.map((alumno) =>
+    setAlumnos((prev) =>
+      prev.map((alumno) =>
         alumno.id === id ? { ...alumno, ...datosActualizados } : alumno
       )
     );
