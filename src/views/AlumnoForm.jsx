@@ -1,13 +1,13 @@
 // Importación de hooks y contexto necesario
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import { AlumnoContext } from "../context/AlumnoContext.jsx";
 import "./AlumnoForm.css";
 
 // Componente funcional del formulario para agregar alumno
 const AlumnoForm = () => {
   const navigate = useNavigate(); // Hook para redirigir luego de guardar
+  const { id } = useParams();
   const { alumnos, actualizarAlumno, agregarAlumno } =
     useContext(AlumnoContext); // Función del contexto para agregar alumno
 
@@ -33,19 +33,20 @@ const AlumnoForm = () => {
 
   // Función que se ejecuta al enviar el formulario
   const handleSubmit = (e) => {
-    e.preventDefault(); // Evita recargar la página
+    e.preventDefault();
     if (id) {
-      actualizarAlumno(parseInt(id), formData);
+      actualizarAlumno(Number(id), formData);
+      alert(`Alumno ${formData.nombre} actualizado correctamente`);
     } else {
       // Crea un nuevo alumno con un ID único
       const nuevoAlumno = {
         ...formData,
         id: Date.now(),
       };
-
-      agregarAlumno(nuevoAlumno); // Llama a la función del contexto para guardar el alumno
+      agregarAlumno(nuevoAlumno);
+      alert(`Alumno ${nuevoAlumno.nombre} agregado correctamente`);
     }
-    navigate("/alumnos"); // Redirige a la vista de lista de alumnos
+    navigate("/alumnos");
   };
 
   useEffect(() => {
