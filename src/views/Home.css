@@ -1,29 +1,78 @@
-.home {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
+body {
+  background-color: #f9f9f9;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #25597C;
 }
 
-.home h1 {
-  color: #2c3e50;
-  margin-bottom: 1.5rem;
-  text-align: center;
+/* Títulos */
+h1, h2, h3 {
+  color: #25597C;
 }
 
-.home p {
-  color: #34495e;
-  font-size: 1.1rem;
-  line-height: 1.6;
-  text-align: center;
-  margin-bottom: 2rem;
+/* Texto general */
+p, .text-muted {
+  color: #333;
 }
 
-.notification {
-  background-color: #2ecc71;
+/* Botones */
+.btn-primary {
+  background-color: #25597C;
+  border-color: #25597C;
+}
+
+.btn-primary:hover {
+  background-color: #1a3e5a;
+  border-color: #1a3e5a;
+}
+
+.btn-outline-secondary {
+  border-color: #5A90A0;
+  color: #5A90A0;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #5A90A0;
+  color: #fff;
+}
+
+/* Alertas */
+.alert {
+  border-radius: 0.5rem;
+  font-weight: 500;
+}
+
+/* Tarjetas */
+.card {
+  border-radius: 0.75rem;
+  transition: transform 0.2s ease-in-out;
+  border: 1px solid #e1e1e1;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Iconos en tarjetas */
+.card .bi {
+  color: #25597C;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover .bi {
+  transform: scale(1.15);
+}
+
+.badge {
+  font-size: 0.85rem;
+  background-color: #25597C;
   color: white;
-  padding: 1rem;
-  border-radius: 4px;
-  margin-bottom: 1rem;
-  text-align: center;
-  animation: fadeIn 0.3s ease-in;
+}
+
+
+
+
+.unju-logo {
+  max-height: 100px; 
+  display: inline-block;
 }
