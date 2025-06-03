@@ -4,7 +4,7 @@ export const AlumnoContext = createContext();
 
 export const AlumnoProvider = ({ children }) => {
   const [mensaje, setMensaje] = useState("");
-   const alumnosIniciales = [
+  const alumnosIniciales = [
     {
       id: 1,
       lu: "APU004576",
@@ -13,7 +13,7 @@ export const AlumnoProvider = ({ children }) => {
       curso: "Programación Visual",
       email: "maxisanchezms.ms@gmail.com",
       domicilio: "Soldado Sevilla 29",
-      telefono: "3884625359"
+      telefono: "3884625359",
     },
     {
       id: 2,
@@ -23,17 +23,17 @@ export const AlumnoProvider = ({ children }) => {
       curso: "Programacion Visual",
       email: "43269789@fi.unju.edu.ar",
       domicilio: "B° 20 Viviendas S/N",
-      telefono: "3884379293"
+      telefono: "3884379293",
     },
     {
       id: 3,
-      lu: "5634",
+      lu: "APU005634",
       nombre: "Lautaro",
       apellido: "Barrientos",
       curso: "Programación",
       email: "barrientoslautaro8@gmail.com",
       domicilio: "Alto Gorriti",
-      telefono: "3644369786"
+      telefono: "3644369786",
     },
     {
       id: 4,
@@ -43,8 +43,8 @@ export const AlumnoProvider = ({ children }) => {
       curso: "Programación Visual",
       email: "ivothaielvicencio@gmail.com",
       domicilio: "El picaflor 477",
-      telefono: "2995757328"
-    }
+      telefono: "2995757328",
+    },
   ];
   const [alumnos, setAlumnos] = useState(alumnosIniciales);
 

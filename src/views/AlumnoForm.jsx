@@ -34,18 +34,29 @@ const AlumnoForm = () => {
   // Función que se ejecuta al enviar el formulario
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const error = validarAlumno(formData);
+    if (error) {
+      alert(error);
+      return;
+    }
+
+    const luConPrefijo = `APU00${formData.lu.trim()}`;
+
+    let datosAlumno = {
+      ...formData,
+      lu: luConPrefijo,
+    };
+
     if (id) {
-      actualizarAlumno(Number(id), formData);
+      actualizarAlumno(Number(id), datosAlumno);
       alert(`Alumno ${formData.nombre} actualizado correctamente`);
     } else {
-      // Crea un nuevo alumno con un ID único
-      const nuevoAlumno = {
-        ...formData,
-        id: Date.now(),
-      };
-      agregarAlumno(nuevoAlumno);
-      alert(`Alumno ${nuevoAlumno.nombre} agregado correctamente`);
+      datosAlumno = { ...formData, id: Date.now() };
+      agregarAlumno(datosAlumno);
+      alert(`Alumno ${datosAlumno.nombre} agregado correctamente`);
     }
+
     navigate("/alumnos");
   };
 
@@ -65,24 +76,75 @@ const AlumnoForm = () => {
     }
   }, [id, alumnos, navigate]);
 
+  const validarAlumno = (formData) => {
+    const camposRequeridos = [
+      "lu",
+      "nombre",
+      "apellido",
+      "curso",
+      "email",
+      "domicilio",
+      "telefono",
+    ];
+    const camposVacios = camposRequeridos.filter(
+      (campo) => !formData[campo]?.trim()
+    );
+
+    if (camposVacios.length > 0) {
+      return `Los siguientes campos son obligatorios: ${camposVacios.join(
+        ", "
+      )}`;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const luRegex = /^\d{4,10}$/;
+    const nombreRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,50}$/;
+    const cursoRegex = /^[a-zA-Z0-9 ]{2,30}$/;
+    const domicilioRegex = /^.{5,100}$/;
+    const telefonoRegex = /^\d{10,15}$/;
+
+    if (formData.email.trim() && !emailRegex.test(formData.email.trim())) {
+      return "El correo electrónico no tiene un formato válido";
+    }
+    if (!luRegex.test(formData.lu.trim())) {
+      return "LU debe ser un número de 4 a 10 dígitos";
+    }
+    if (!nombreRegex.test(formData.nombre.trim())) {
+      return "Nombre debe contener solo letras y tener entre 3 y 50 caracteres";
+    }
+    if (!nombreRegex.test(formData.apellido.trim())) {
+      return "Apellido debe contener solo letras y tener entre 3 y 50 caracteres";
+    }
+    if (!cursoRegex.test(formData.curso.trim())) {
+      return "Curso debe contener letras o números y tener entre 2 y 30 caracteres";
+    }
+    if (!domicilioRegex.test(formData.domicilio.trim())) {
+      return "Domicilio debe tener entre 5 y 100 caracteres";
+    }
+    if (!telefonoRegex.test(formData.telefono.trim())) {
+      return "Teléfono debe contener solo números y tener entre 10 y 15 dígitos";
+    }
+
+    return null;
+  };
+
   return (
     <div className="alumno-form">
-      <h2>Nuevo Alumno</h2>
-
+      <h2>{formData.id ? "Editar Alumno" : "Nuevo Alumno"}</h2>
       {/* Formulario controlado */}
       <form onSubmit={handleSubmit}>
         {/* Campo LU */}
-        <div className="form-group">
-          <label htmlFor="lu">LU:</label>
-          <input
-            type="text"
-            id="lu"
-            name="lu"
-            value={formData.lu}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        {!formData.id && (
+          <div className="form-group">
+            <label htmlFor="lu">LU:</label>
+            <input
+              type="text"
+              className="form-control"
+              value={formData.lu}
+              onChange={(e) => setFormData({ ...formData, lu: e.target.value })}
+            />
+          </div>
+        )}
 
         {/* Campo Nombre */}
         <div className="form-group">
