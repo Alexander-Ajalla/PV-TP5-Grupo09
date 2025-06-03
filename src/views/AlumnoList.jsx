@@ -9,61 +9,77 @@ function AlumnoList() {
   const { alumnos, eliminarAlumno } = useContext(AlumnoContext);
 
   return (
-    <div className="alumno-list">
-      <h2>Lista de Alumnos</h2>
-
-      {/* Enlace para ir al formulario de agregar nuevo alumno */}
-      <Link to="/alumnos/nuevo" className="btn btn-primary">
-        Agregar Nuevo Alumno
-      </Link>
+    <div className="container py-4">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h2 className="mb-0">
+          <i className="bi bi-mortarboard-fill me-2"></i>
+          Lista de Alumnos
+        </h2>
+        <Link to="/alumnos/nuevo" className="btn btn-primary rounded-pill">
+          <i className="bi bi-person-plus-fill me-2"></i>
+          Agregar Nuevo Alumno
+        </Link>
+      </div>
 
       {/* Si no hay alumnos, muestra mensaje */}
       {alumnos.length === 0 ? (
-        <p>No hay alumnos registrados.</p>
+        <div className="alert alert-info text-center">
+          <i className="bi bi-info-circle-fill me-2"></i>
+          No hay alumnos registrados.
+        </div>
       ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>LU</th>
-              <th>Nombre</th>
-              <th>Apellido</th>
-              <th>Curso</th>
-              <th>Email</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* Recorre el array de alumnos y crea una fila por cada uno */}
-            {alumnos.map((alumno) => (
-              <tr key={alumno.id}>
-                <td>{alumno.lu}</td>
-                <td>{alumno.nombre}</td>
-                <td>{alumno.apellido}</td>
-                <td>{alumno.curso}</td>
-                <td>{alumno.email}</td>
-                <td>
-                  {/* Botón para ver detalles */}
-                  <Link to={`/alumnos/${alumno.id}`} className="btn btn-info">Ver Detalles</Link>
-
-                  {/* Botón para editar */}
-                  <Link to={`/alumnos/${alumno.id}/editar`} className="btn btn-warning">Editar</Link>
-
-                  {/* Botón para eliminar con confirmación */}
-                  <button 
-                    onClick={() => {
-                      if (window.confirm('¿Está seguro de que desea eliminar este alumno?')) {
-                        eliminarAlumno(alumno.id); // Llama a la función del contexto
-                      }
-                    }} 
-                    className="btn btn-danger"
-                  >
-                    Eliminar
-                  </button>
-                </td>
+        <div className="table-responsive">
+          <table className="table table-striped table-hover align-middle">
+            <thead>
+              <tr>
+                <th scope="col">Nombre Completo</th>
+                <th scope="col">LU</th>
+                <th scope="col">Curso</th>
+                <th scope="col">Email</th>
+                <th scope="col">Acciones</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {alumnos.map((alumno) => (
+                <tr key={alumno.id}>
+                  <td>{`${alumno.apellido}, ${alumno.nombre}`}</td>
+                  <td>{alumno.lu}</td>
+                  <td>{alumno.curso}</td>
+                  <td>{alumno.email}</td>
+                  <td>
+                    <div className="d-flex gap-2">
+                      <Link 
+                        to={`/alumnos/${alumno.id}`} 
+                        className="btn btn-outline-info btn-sm"
+                        title="Ver Detalles"
+                      >
+                        <i className="bi bi-eye-fill"></i>
+                      </Link>
+                      <Link 
+                        to={`/alumnos/${alumno.id}/editar`} 
+                        className="btn btn-outline-warning btn-sm"
+                        title="Editar"
+                      >
+                        <i className="bi bi-pencil-fill"></i>
+                      </Link>
+                      <button 
+                        onClick={() => {
+                          if (window.confirm('¿Está seguro de que desea eliminar este alumno?')) {
+                            eliminarAlumno(alumno.id);
+                          }
+                        }} 
+                        className="btn btn-outline-danger btn-sm"
+                        title="Eliminar"
+                      >
+                        <i className="bi bi-trash-fill"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );
