@@ -1,12 +1,22 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AlumnoContext } from '../context/AlumnoContext.jsx'; // Importa el contexto donde están los alumnos
-import './AlumnoList.css'; 
-
+import { AlumnoContext } from '../context/AlumnoContext.jsx';
+import './AlumnoList.css';
 
 function AlumnoList() {
-  //aca se extraeria el array de alumnos y la función para eliminar del contexto
   const { alumnos, eliminarAlumno } = useContext(AlumnoContext);
+  const [busquedaLU, setBusquedaLU] = useState('');
+
+  // Función para manejar input de búsqueda (solo números)
+  const handleBusquedaLU = (e) => {
+    const soloNumeros = e.target.value.replace(/\D/g, '');
+    setBusquedaLU(soloNumeros);
+  };
+
+  // Filtrar alumnos que incluyan el texto en la LU
+  const alumnosFiltrados = alumnos.filter((alumno) =>
+    alumno.lu.replace("APU00", "").includes(busquedaLU)
+  );
 
   return (
     <div className="container py-4">
@@ -21,11 +31,27 @@ function AlumnoList() {
         </Link>
       </div>
 
+      {/* Input para buscar LU */}
+      <div className="mb-3">
+        <label htmlFor="buscarLu" className="form-label">
+          Buscar por LU:
+        </label>
+        <input
+          type="text"
+          id="buscarLu"
+          className="form-control"
+          placeholder="Ingrese LU (solo números)"
+          value={busquedaLU}
+          onChange={handleBusquedaLU}
+          inputMode="numeric"
+        />
+      </div>
+
       {/* Si no hay alumnos, muestra mensaje */}
-      {alumnos.length === 0 ? (
+      {alumnosFiltrados.length === 0 ? (
         <div className="alert alert-info text-center">
           <i className="bi bi-info-circle-fill me-2"></i>
-          No hay alumnos registrados.
+          No se encontraron alumnos.
         </div>
       ) : (
         <div className="table-responsive">
@@ -40,7 +66,7 @@ function AlumnoList() {
               </tr>
             </thead>
             <tbody>
-              {alumnos.map((alumno) => (
+              {alumnosFiltrados.map((alumno) => (
                 <tr key={alumno.id}>
                   <td>{`${alumno.apellido}, ${alumno.nombre}`}</td>
                   <td>{alumno.lu}</td>
@@ -48,26 +74,28 @@ function AlumnoList() {
                   <td>{alumno.email}</td>
                   <td>
                     <div className="d-flex gap-2">
-                      <Link 
-                        to={`/alumnos/${alumno.id}`} 
+                      <Link
+                        to={`/alumnos/${alumno.id}`}
                         className="btn btn-outline-info btn-sm"
                         title="Ver Detalles"
                       >
                         <i className="bi bi-eye-fill"></i>
                       </Link>
-                      <Link 
-                        to={`/alumnos/${alumno.id}/editar`} 
+                      <Link
+                        to={`/alumnos/${alumno.id}/editar`}
                         className="btn btn-outline-warning btn-sm"
                         title="Editar"
                       >
                         <i className="bi bi-pencil-fill"></i>
                       </Link>
-                      <button 
+                      <button
                         onClick={() => {
-                          if (window.confirm('¿Está seguro de que desea eliminar este alumno?')) {
+                          if (
+                            window.confirm('¿Está seguro de que desea eliminar este alumno?')
+                          ) {
                             eliminarAlumno(alumno.id);
                           }
-                        }} 
+                        }}
                         className="btn btn-outline-danger btn-sm"
                         title="Eliminar"
                       >
