@@ -45,6 +45,16 @@ export const AlumnoProvider = ({ children }) => {
       domicilio: "El picaflor 477",
       telefono: "2995757328",
     },
+    {
+      id: 5,
+      lu: "APU005855",
+      nombre: "Alexander",
+      apellido: "Ajalla",
+      curso: "Programación Visual",
+      email: "alexander.ajalla404@gmail.com",
+      domicilio: "Av. Exodo B° Centro",
+      telefono: "3884217429",
+    },
   ];
   const [alumnos, setAlumnos] = useState(alumnosIniciales);
 
