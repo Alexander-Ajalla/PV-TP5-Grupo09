@@ -1,46 +1,97 @@
 .about {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2.5rem 1.5rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #e9ecef 100%);
+  border-radius: 18px;
+  box-shadow: 0 6px 24px rgba(44, 62, 80, 0.08);
 }
 
 .about h2 {
-  color: #2c3e50;
-  margin-bottom: 2rem;
+  color: #1a2634;
+  margin-bottom: 2.5rem;
   text-align: center;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
 .about-content {
-  background-color: white;
-  border-radius: 8px;
-  padding: 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  border: none;
 }
 
 .about-content p {
   color: #34495e;
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin-bottom: 2rem;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  margin-bottom: 2.2rem;
+  text-align: center;
 }
 
 .about-content h3 {
-  color: #2c3e50;
-  margin: 1.5rem 0 1rem;
+  color: #1a2634;
+  margin: 2rem 0 1.2rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  border-left: 4px solid #0d6efd;
+  padding-left: 0.6rem;
+  background: linear-gradient(90deg, #f8fafc 80%, #e9ecef 100%);
 }
 
 .about-content ul {
   list-style-type: none;
   padding: 0;
-  margin: 0 0 2rem;
+  margin: 0 0 2.2rem;
 }
 
 .about-content li {
   color: #34495e;
-  padding: 0.5rem 0;
+  padding: 0.7rem 1rem;
   border-bottom: 1px solid #ecf0f1;
+  font-size: 1.08rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  transition: background 0.2s;
+  background: linear-gradient(90deg, #f8fafc 80%, #e9ecef 100%);
 }
 
 .about-content li:last-child {
   border-bottom: none;
 }
+
+.about-content li::before {
+  content: '\2022';
+  color: #0d6efd;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+@media (max-width: 768px) {
+  .about {
+    padding: 1.2rem 0.5rem;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about h2 {
+    font-size: 1.3rem;
+  }
+  .about-content h3 {
+    font-size: 1.05rem;
+  }
+  .about-content p {
+    font-size: 1rem;
+  }
+  .about-content li {
+    font-size: 0.98rem;
+    padding: 0.5rem 0.5rem;
+  }
+}
+
