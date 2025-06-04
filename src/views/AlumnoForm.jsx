@@ -52,7 +52,10 @@ const AlumnoForm = () => {
       actualizarAlumno(Number(id), datosAlumno);
       alert(`Alumno ${formData.nombre} actualizado correctamente`);
     } else {
-      datosAlumno = { ...formData, id: Date.now() };
+      datosAlumno = {
+        ...datosAlumno,
+        id: Date.now(),
+      };
       agregarAlumno(datosAlumno);
       alert(`Alumno ${datosAlumno.nombre} agregado correctamente`);
     }
